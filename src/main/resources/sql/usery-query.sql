@@ -1,0 +1,1 @@
+select user_id, password, email, unique_id from user where user_id = ? and password = ?;

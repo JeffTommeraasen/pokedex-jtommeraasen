@@ -3,11 +3,13 @@ package com.bushelpowered.pokedex.spring
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.Import
 
 @SpringBootApplication
 @ComponentScan(value=["com.bushelpowered.pokedex"])
-open class PokedexJtommeraasenApplication
+@Import(DataAccessConfig::class)
+open class PokedexApplication
 
 fun main(args: Array<String>) {
-    runApplication<PokedexJtommeraasenApplication>(*args)
+    runApplication<PokedexApplication>(*args)
 }

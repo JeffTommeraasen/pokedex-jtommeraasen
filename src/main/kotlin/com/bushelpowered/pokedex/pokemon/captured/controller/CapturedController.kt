@@ -1,4 +1,4 @@
-package com.bushelpowered.pokedex.controller
+package com.bushelpowered.pokedex.pokemon.captured.controller
 
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping

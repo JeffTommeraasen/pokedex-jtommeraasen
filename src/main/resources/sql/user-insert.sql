@@ -1,0 +1,1 @@
+insert into user(user_id, password, email, unique_id) values (?, ?, ?, ?);
