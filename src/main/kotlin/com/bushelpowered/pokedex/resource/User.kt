@@ -5,7 +5,8 @@ package com.bushelpowered.pokedex.resource
  */
 data class User(
     val userId: String,
-    val password: String,
-    val email: String,
-    var uniqueId: String?) {
+    var password: String,
+    var email: String?,
+    var uniqueId: String?,
+    val role: String) {
 }

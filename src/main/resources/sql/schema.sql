@@ -13,10 +13,17 @@
 --     `captured`      BIT
 -- );
 
+drop table if exists `captured_pokemon`;
+create table if not exists `captured_pokemon`(
+    `id`            INTEGER PRIMARY KEY NOT NULL,
+    `captured`      BIT
+);
+
 drop table if exists `user`;
 create table if not exists `user`(
-    `user_id`       VARCHAR(50),
-    `password`      VARCHAR(50),
+    `user_id`       VARCHAR(50) PRIMARY KEY NOT NULL,
+    `password`      VARCHAR(100),
     `email`         VARCHAR(50),
-    `unique_id`     VARCHAR(50)
+    `unique_id`     VARCHAR(50),
+    `role`          VARCHAR(50)
 );

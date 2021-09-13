@@ -1,2 +1,0 @@
-insert into pokedex(id, name, types, height, weight, abilities, egg_groups, stats, genus, description, captured)
-values(1,'Bulbasaur','[''poison'', ''grass'']',7.00,69.00,'[''chlorophyll'', ''overgrow'']','[''plant'', ''monster'']','{''hp'': 45, ''speed'': 45, ''attack'': 49, ''defense'': 49, ''special-attack'': 65, ''special-defense'': 65}','Seed Pokémon','Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun’s rays, the seed grows progressively larger.', 0);

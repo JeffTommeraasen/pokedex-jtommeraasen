@@ -1,11 +1,10 @@
-package com.bushelpowered.pokedex.account.controller
+package com.bushelpowered.pokedex.user.controller
 
-import com.bushelpowered.pokedex.account.service.DefaultUserService
-import com.bushelpowered.pokedex.account.service.UserService
+import com.bushelpowered.pokedex.user.service.DefaultCreateUserService
 import com.bushelpowered.pokedex.exceptions.ExistsException
+import com.bushelpowered.pokedex.login.LoginController
 import com.bushelpowered.pokedex.resource.ResponseError
 import com.bushelpowered.pokedex.resource.User
-import lombok.extern.slf4j.Slf4j
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -16,23 +15,21 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 @RestController
-@RequestMapping("/pokedex/v1")
-@Slf4j
-class AccountController(userService: DefaultUserService) {
+class UserController(val userService: DefaultCreateUserService) {
 
-    private val log: Logger = LoggerFactory.getLogger(this::class.java)
-    private val userService : UserService = userService
+    companion object {
+        val LOG: Logger = LoggerFactory.getLogger(LoginController::class.java)
+    }
 
-    @PutMapping(value=arrayOf("/account"), consumes=arrayOf(MediaType.APPLICATION_JSON_VALUE), produces=arrayOf(MediaType.APPLICATION_JSON_VALUE))
-    fun createAccount(@RequestBody user: User): ResponseEntity<*> {
+    @PutMapping(value=arrayOf("/v1/user"), consumes=arrayOf(MediaType.APPLICATION_JSON_VALUE), produces=arrayOf(MediaType.APPLICATION_JSON_VALUE))
+    fun createUser(@RequestBody user: User): ResponseEntity<*> {
         assertInputParameter(user)
-        println("DEBUG::user params asserted")
         user.uniqueId = UUID.randomUUID().toString()
         try {
             val user: User = userService.createUser(user)
         } catch(e:ExistsException) {
-            log.error("exception=" + e .message, e)
-            return ResponseEntity(ResponseError(e.status, e.message), e.status)
+            LOG.error("A user record already exists with the supplied user information.", e)
+            return ResponseEntity(ResponseError(e.status, e.status.value(), e.message), e.status)
         }
         return ResponseEntity(user, HttpStatus.OK)
     }

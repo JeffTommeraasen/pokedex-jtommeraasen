@@ -1,5 +1,7 @@
 package com.bushelpowered.pokedex.resource
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 /**
  * Data resource to encapsulate the attributes of a Pokemon.
  */
@@ -7,7 +9,7 @@ data class Pokemon(
     val id: Int,
     val name: String,
     //val types: Types,
-    //val types: Array<String>,
+//    val types: Array<String>,
     val types: String,
     val height: Double,
     val weight: Double,

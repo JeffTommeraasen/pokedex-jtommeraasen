@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
 
+/**
+ * Advice handler for a {@link ExistsException}.
+ */
 @ControllerAdvice
 class ExistsExceptionHandler {
 
     @ExceptionHandler(ExistsException::class)
     fun handleExistsException(e:ExistsException, request:WebRequest) : ResponseEntity<ResponseError> {
-        val errorMessage: String? = e.message
-        val responseError: ResponseError = ResponseError(e.status, e.message)
+        val responseError: ResponseError = ResponseError(e.status, e.status.value(), e.message)
         return ResponseEntity<ResponseError>(responseError, e.status)
     }
 }

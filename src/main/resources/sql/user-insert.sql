@@ -1,1 +1,1 @@
-insert into user(user_id, password, email, unique_id) values (?, ?, ?, ?);
+insert into user(user_id, password, email, unique_id, role) values ('jefftommeraasen', '$2a$10$EXwFYiEbnC3w9qHFh/Kv9OTLV71hkPgeZ0h2QQOHRKlE/RUZkgZYO', 'jeff.tommeraasen@gmail.com', '1234-1234-1234-1234', 'TRAINER');
