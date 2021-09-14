@@ -1,6 +1,7 @@
 package com.bushelpowered.pokedex.pokemon.search.repository
 
 import com.bushelpowered.pokedex.mybatis.mapper.SearchMapper
+import com.bushelpowered.pokedex.resource.Page
 import com.bushelpowered.pokedex.resource.Pokemon
 import org.springframework.stereotype.Component
 
@@ -15,7 +16,7 @@ class DefaultSearchRepository(val searchMapper: SearchMapper) : SearchRepository
         return if(captured) searchMapper.searchByCaptured(1) else searchMapper.searchByUncaptured()
     }
 
-    override fun searchByIdAndCount(id: Int, count: Int) : List<Pokemon> {
-        return searchMapper.searchByPagination(id, count)
+    override fun searchByPage(page: Page) : List<Pokemon> {
+        return searchMapper.searchByPagination(page.id, page.count, page.sort)
     }
 }

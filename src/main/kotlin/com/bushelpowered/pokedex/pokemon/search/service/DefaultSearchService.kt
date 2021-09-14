@@ -1,6 +1,7 @@
 package com.bushelpowered.pokedex.pokemon.search.service
 
 import com.bushelpowered.pokedex.pokemon.search.repository.DefaultSearchRepository
+import com.bushelpowered.pokedex.resource.Page
 import com.bushelpowered.pokedex.resource.Pokemon
 import org.springframework.stereotype.Component
 
@@ -15,8 +16,8 @@ class DefaultSearchService(val searchRepository: DefaultSearchRepository) : Sear
         return searchRepository.searchByCaptured(captured)
     }
 
-    override fun searchByIdAndCount(id: Int, count: Int) : List<Pokemon> {
-        return searchRepository.searchByIdAndCount(id, count)
+    override fun searchByPage(page: Page) : List<Pokemon> {
+        return searchRepository.searchByPage(page)
     }
 
 }

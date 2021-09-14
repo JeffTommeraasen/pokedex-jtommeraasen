@@ -1,5 +1,6 @@
 package com.bushelpowered.pokedex.pokemon.search.service
 
+import com.bushelpowered.pokedex.resource.Page
 import com.bushelpowered.pokedex.resource.Pokemon
 
 interface SearchService {
@@ -8,5 +9,5 @@ interface SearchService {
 
     open fun searchByCaptured(captured: Boolean) : List<Pokemon>
 
-    open fun searchByIdAndCount(id: Int, count: Int) : List<Pokemon>
+    open fun searchByPage(page: Page) : List<Pokemon>
 }

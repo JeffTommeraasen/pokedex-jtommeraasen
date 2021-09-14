@@ -1,6 +1,8 @@
 package com.bushelpowered.pokedex.mybatis.mapper
 
+import com.bushelpowered.pokedex.resource.Page
 import com.bushelpowered.pokedex.resource.Pokemon
+import com.bushelpowered.pokedex.resource.Sort
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Param
 import org.apache.ibatis.annotations.Select
@@ -20,6 +22,7 @@ open interface SearchMapper {
     @Select("select * from pokedex p, captured_pokemon c where p.id not in (select c.id from captured_pokemon c) or (p.id = c.id and (c.captured = null or c.captured = 0))")
     fun searchByUncaptured() : List<Pokemon>
 
-    @Select("select * from pokedex where id >= #{id} and id <= (#{id} + #{count})")
-    fun searchByPagination(id: Int, count: Int) : List<Pokemon>
+    //@Select("select * from pokedex where id >= #{id} and id <= (#{id} + #{count})")
+    @Select("select * from pokedex where id >= #{id} and id <= (#{id} + #{count})")// order by id #{sort}")
+    fun searchByPagination(id: Int?, count: Int?, sort: Sort?) : List<Pokemon>
 }

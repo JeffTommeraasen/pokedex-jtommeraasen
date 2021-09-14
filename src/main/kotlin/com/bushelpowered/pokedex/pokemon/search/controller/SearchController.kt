@@ -1,7 +1,9 @@
 package com.bushelpowered.pokedex.pokemon.search.controller
 
 import com.bushelpowered.pokedex.pokemon.search.service.SearchService
+import com.bushelpowered.pokedex.resource.Page
 import com.bushelpowered.pokedex.resource.Pokemon
+import com.bushelpowered.pokedex.resource.Sort
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
@@ -25,8 +27,8 @@ open class SearchController(val searchService: SearchService) {
     }
 
     @GetMapping("/pokemons")
-    open fun listPokemon(@RequestParam("id") id: Int, @RequestParam("count") count: Int) : ResponseEntity<List<Pokemon>> {
-        val pokemons : List<Pokemon> = searchService.searchByIdAndCount(id, count)
+    open fun listPokemon(page: Page) : ResponseEntity<List<Pokemon>> {
+        val pokemons : List<Pokemon> = searchService.searchByPage(page)
         return ResponseEntity(pokemons, HttpStatus.OK)
     }
 }
