@@ -25,7 +25,8 @@ open class SearchController(val searchService: SearchService) {
     }
 
     @GetMapping("/pokemons")
-    fun listPokemon(startIndex: Int, count: Int): List<String> {
-        return listOf("myString")
+    open fun listPokemon(@RequestParam("id") id: Int, @RequestParam("count") count: Int) : ResponseEntity<List<Pokemon>> {
+        val pokemons : List<Pokemon> = searchService.searchByIdAndCount(id, count)
+        return ResponseEntity(pokemons, HttpStatus.OK)
     }
 }

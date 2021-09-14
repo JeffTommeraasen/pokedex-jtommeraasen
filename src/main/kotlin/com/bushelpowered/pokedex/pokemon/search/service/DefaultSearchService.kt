@@ -14,4 +14,9 @@ class DefaultSearchService(val searchRepository: DefaultSearchRepository) : Sear
     override fun searchByCaptured(captured: Boolean): List<Pokemon> {
         return searchRepository.searchByCaptured(captured)
     }
+
+    override fun searchByIdAndCount(id: Int, count: Int) : List<Pokemon> {
+        return searchRepository.searchByIdAndCount(id, count)
+    }
+
 }

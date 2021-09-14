@@ -8,15 +8,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.context.request.WebRequest
 
-/**
- * Advice handler for an {@link IllegalArgumentException}.
- */
 @ControllerAdvice
-@Order(3)
-class IllegalArgumentExceptionHandler {
+@Order(4)
+class ExceptionHandler {
 
-    @ExceptionHandler(IllegalArgumentException::class)
-    fun handle(e: IllegalArgumentException, request: WebRequest) : ResponseEntity<ResponseError> {
-        return ResponseEntity<ResponseError>(ResponseError(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.value(), e.message), HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(Throwable::class)
+    fun handleThrowable(e: Throwable, request: WebRequest) : ResponseEntity<ResponseError> {
+        val responseError = ResponseError(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value(), e.message)
+        return ResponseEntity<ResponseError>(responseError, HttpStatus.INTERNAL_SERVER_ERROR)
     }
 }

@@ -14,4 +14,8 @@ class DefaultSearchRepository(val searchMapper: SearchMapper) : SearchRepository
     override fun searchByCaptured(captured: Boolean): List<Pokemon> {
         return if(captured) searchMapper.searchByCaptured(1) else searchMapper.searchByUncaptured()
     }
+
+    override fun searchByIdAndCount(id: Int, count: Int) : List<Pokemon> {
+        return searchMapper.searchByPagination(id, count)
+    }
 }
