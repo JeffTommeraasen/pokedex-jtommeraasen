@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Select
 @Mapper
 open interface SearchMapper {
 
-    @Select("select * from pokedex where ids = #{id}")
+    @Select("select * from pokedex where id = #{id}")
 //    @Results(id = "pokemons", value=[
 //        Result(column="types", property="types", javaType=Types::class, typeHandler=StringTypeHandler::class)
 //    ])
