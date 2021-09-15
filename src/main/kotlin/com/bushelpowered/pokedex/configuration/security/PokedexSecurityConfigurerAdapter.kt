@@ -47,22 +47,11 @@ open class PokedexSecurityConfigurerAdapter(
             .exceptionHandling()
             .authenticationEntryPoint(AuthEntryPoint())
             .and().headers().frameOptions().disable() // h2 console
-            .and().authorizeRequests().antMatchers("/swagger-ui/").permitAll()
-            .and().authorizeRequests().antMatchers("/api/swagger-ui/").permitAll()
-            .and().authorizeRequests().antMatchers("/api/swagger-ui").permitAll()
-            .and().authorizeRequests().antMatchers("/api/swagger-ui/**").permitAll()
-            .and().authorizeRequests().antMatchers("/swagger-ui").permitAll()
-            .and().authorizeRequests().antMatchers("/swagger-ui/**").permitAll()
-            .and().authorizeRequests().antMatchers("/v1/login").permitAll() // to login
-            .and().authorizeRequests().antMatchers("/v1/user").permitAll() // to create
-            .and().authorizeRequests().antMatchers("/").permitAll() // h2 console
-            .and().authorizeRequests().antMatchers("/h2-console/**").permitAll() // h2 console
-
-            .and().authorizeRequests().antMatchers("/swagger-ui.html").permitAll()
-            .and().authorizeRequests().antMatchers("/v2/api-docs").permitAll()
-            .and().authorizeRequests().antMatchers("/swagger-resources/**").permitAll()
-            .and().authorizeRequests().antMatchers("/configuration/ui").permitAll()
-            .and().authorizeRequests().antMatchers("/configuration/security").permitAll()
+            .and().authorizeRequests()
+            .antMatchers("/v1/login").permitAll() // user login
+            .antMatchers("/v1/user").permitAll() // user create
+            .antMatchers("/").permitAll() // h2 console
+            .antMatchers("/h2-console/**").permitAll() // h2 console
             .anyRequest().authenticated()
             .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -75,14 +64,16 @@ open class PokedexSecurityConfigurerAdapter(
     }
 
     @Throws(java.lang.Exception::class)
-    override fun configure(web: WebSecurity) {
-        web.ignoring().antMatchers(
+    override fun configure(webSecurity: WebSecurity) {
+        webSecurity.ignoring().antMatchers(
             "/v2/api-docs",
             "/configuration/ui",
             "/swagger-resources",
             "/configuration/security",
             "/swagger-ui.html",
-            "/webjars/**"
+            "/webjars/**",
+            "/swagger-resources/**",
+            "/swagger-ui/**"
         )
     }
 
