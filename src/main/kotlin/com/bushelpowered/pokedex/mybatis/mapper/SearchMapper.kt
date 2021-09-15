@@ -1,6 +1,5 @@
 package com.bushelpowered.pokedex.mybatis.mapper
 
-import com.bushelpowered.pokedex.resource.Page
 import com.bushelpowered.pokedex.resource.Pokemon
 import com.bushelpowered.pokedex.resource.Sort
 import org.apache.ibatis.annotations.Mapper
