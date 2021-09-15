@@ -1,5 +1,6 @@
 package com.bushelpowered.pokedex.user.service
 
+import com.bushelpowered.pokedex.exceptions.UserNotFoundException
 import com.bushelpowered.pokedex.login.PokedexUserDetails
 import com.bushelpowered.pokedex.user.repository.UserDto
 import com.bushelpowered.pokedex.user.repository.UserRepository
@@ -12,6 +13,9 @@ class DefaultUserDetailsService(val userRepository: UserRepository) : UserDetail
 
     override fun loadUserByUsername(username: String?): UserDetails {
         val userDto : UserDto = userRepository.getUserDetails(username)
+        if (userDto == null) {
+            throw UserNotFoundException("User name [" + username + "] was not found.")
+        }
         return PokedexUserDetails(userDto);
     }
 }

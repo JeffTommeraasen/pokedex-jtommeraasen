@@ -32,9 +32,6 @@ class LoginController(
         } catch(e: BadCredentialsException) {
             LOG.error("Invalid credentials used for ulogin request=[" + userLogin + "], message=" + e.message, e)
             throw e
-        }  catch(e: Exception) {
-            LOG.error("An error occurred while authenticating the login request=[" + userLogin + "], message=" + e.message, e)
-            throw HttpClientErrorException(HttpStatus.UNAUTHORIZED, e.message)
         }
         val userDetails: PokedexUserDetails = auth.principal as PokedexUserDetails
         val token: String = jwtTokenUtil.generateAccessToken(userDetails)
