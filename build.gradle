@@ -42,10 +42,6 @@ repositories {
     }
 }
 
-configurations.all {
-    exclude group: 'ch.qos.logback'
-}
-
 dependencies {
     implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version:'2.2.0'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.4.4'
@@ -67,7 +63,6 @@ dependencies {
 }
 
 bootJar {
-    mainClassName='com.bushelpowered.pokedex.configuration.PokedexApplication'
     manifest {
         attributes(
                 (java.util.jar.Attributes.Name.IMPLEMENTATION_VERSION.toString()): project.version
@@ -93,9 +88,3 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
-
-//tasks.withType(org.gradle.jvm.tasks.Jar) {
-//    manifest {
-//        attributes["Main-Class"] = "com.bushelpowered.pokedex.configuration.PokedexApplication"
-//    }
-//}

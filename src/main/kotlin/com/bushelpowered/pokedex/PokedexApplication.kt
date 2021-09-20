@@ -1,5 +1,6 @@
-package com.bushelpowered.pokedex.configuration
+package com.bushelpowered.pokedex
 
+import com.bushelpowered.pokedex.configuration.DataAccessConfig
 import com.bushelpowered.pokedex.configuration.security.SecurityConfig
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
