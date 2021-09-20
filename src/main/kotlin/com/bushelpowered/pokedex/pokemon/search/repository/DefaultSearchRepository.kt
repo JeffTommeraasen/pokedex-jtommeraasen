@@ -17,6 +17,6 @@ class DefaultSearchRepository(val searchMapper: SearchMapper) : SearchRepository
     }
 
     override fun searchByPage(page: Page) : List<Pokemon> {
-        return searchMapper.searchByPagination(page.id, page.count, page.sort)
+        return searchMapper.searchByPagination(page.id, page.count, page.sort?.value)
     }
 }

@@ -27,7 +27,8 @@ open class SearchController(val searchService: SearchService) {
     }
 
     @GetMapping("/pokemons")
-    open fun listPokemon(page: Page) : ResponseEntity<List<Pokemon>> {
+    open fun listPokemon(@RequestParam("id") id: Int, @RequestParam("count") count: Int, @RequestParam("sort") sort: Sort) : ResponseEntity<List<Pokemon>> {
+        val page: Page = Page(id, count, sort)
         val pokemons : List<Pokemon> = searchService.searchByPage(page)
         return ResponseEntity(pokemons, HttpStatus.OK)
     }
