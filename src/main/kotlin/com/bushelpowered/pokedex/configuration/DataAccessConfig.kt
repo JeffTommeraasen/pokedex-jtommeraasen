@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 import org.springframework.core.io.ClassPathResource
 import org.springframework.jdbc.datasource.DriverManagerDataSource
 import org.springframework.jdbc.datasource.init.DatabasePopulator
@@ -29,6 +30,7 @@ open class DataAccessConfig {
 
     // The application.properties values do not work.
     @Bean
+    @Primary
     open fun h2Datasource() : DataSource {
         val dataSource: DataSource = createDataSource()
         executeSchema(dataSource)
@@ -40,7 +42,7 @@ open class DataAccessConfig {
     private fun createDataSource() : DataSource {
         val dataSource: DriverManagerDataSource = DriverManagerDataSource()
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.url = "jdbc:h2:file:/users/jefftommeraasen/workspace/pokedex;AUTO_SERVER=true;LOCK_TIMEOUT=90000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1"
+        dataSource.url = "jdbc:h2:file:~/pokedex;AUTO_SERVER=true;LOCK_TIMEOUT=90000;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1"
         dataSource.username="sa"
         dataSource.password="sa"
         return dataSource

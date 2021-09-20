@@ -12,34 +12,6 @@ java.sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
-    mavenLocal()
-    maven {
-        url = "https://pkgs.dev.azure.com/bushelpowered/_packaging/bushelpowered/maven/v1"
-        name = "bushelpowered"
-        credentials {
-            username ="Azure DevOps Services"
-            password = {
-                if (findProperty("vstsMavenAccessToken") != null) {
-                    return findProperty("vstsMavenAccessToken")
-                }
-
-                def token = System.getenv("SYSTEM_ACCESSTOKEN")
-                if (token != null && token != "") {
-                    return token
-                }
-
-                token = System.getenv("AZDO_PERSONAL_ACCESS_TOKEN")
-                if (token != null && token != "") {
-                    return token
-                }
-
-                throw GradleException ("Failed to find Azure Artifacts Personal Access Token.\n" +
-                        "  Follow the instructions at\n" +
-                        "    https://dev.azure.com/bushelpowered/bushel-commons/_git/buildtools-gradle-plugin?anchor=set-up-authentication \n" +
-                        "  to create your token and set up your `vstsMavenAccessToken` global gradle property.")
-            }
-        }
-    }
 }
 
 dependencies {
